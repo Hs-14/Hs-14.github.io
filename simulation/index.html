@@ -1,0 +1,49 @@
+<html>
+
+<head>
+
+    <body class="hold-transition skin-blue sidebar-mini">
+
+
+        <h1 align="center"> Familiarization of the electrical machine laboratory apparatus. </h1>
+        <!-- Write your experiment name -->
+
+
+
+        <h3 style="margin-top:5%">Simulation</h3>
+
+        <!--Simulation content goes here -->
+        <iframe src="story1.html" width="1650" height="1000"></iframe>
+        <script>
+            function openCity(evt, cityName) {
+                var i, tabcontent, tablinks;
+                tabcontent = document.getElementsByClassName("tabcontent");
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                }
+                tablinks = document.getElementsByClassName("tablinks");
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                }
+                document.getElementById(cityName).style.display = "block";
+                evt.currentTarget.className += " active";
+            }
+
+            // Get the element with id="defaultOpen" and click on it
+            document.getElementById("defaultOpen").click();
+        </script>
+        </section>
+        <!-- /.content -->
+        </div>
+        <footer class="main-footer">
+            <h4 align="center">Lab contributed by IIT Roorkee
+                <!-- Institute Name -->
+            </h4>
+        </footer>
+        <!-- /.content-wrapper -->
+        </div>
+
+        <script src="../assets/js/iframeResize.js"></script>
+    </body>
+
+</html>
