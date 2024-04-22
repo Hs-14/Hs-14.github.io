@@ -533,6 +533,22 @@ button {
     justify-content: center;
 }
 
+#imageContainerRLE {
+    width: 1200px; /* Adjust the width as needed */
+    height: 600px; /* Adjust the height as needed */
+    background-image: url('/assets/images/graph_placeholder.png');
+    background-size: cover; /* For background image */
+    background-repeat: no-repeat;
+    background-position: center center;
+    position: relative;
+    overflow: hidden; /* Hide overflowing content */
+
+    /* For actual image inside the container */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 #imageContainerTP {
     width: 1200px; /* Adjust the width as needed */
     height: 600px; /* Adjust the height as needed */
