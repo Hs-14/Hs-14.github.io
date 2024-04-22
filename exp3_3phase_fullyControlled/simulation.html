@@ -468,37 +468,7 @@
                     </div> 
                 </div>
 
-                <!-- control circuit part begins -->
-                <div id="controlCircuit">
-                    <div class="text-center fix-spacing">
-                        <h3 id="controlCircuitHeader"> Thyristor Gate Triggering Circuit </h3>
-                    </div>
-                    <div class="px-5 pb-4 flex-grow-1 text-center fix-spacing" id="RloadPowerCircuit">
-                        <img src="assets/images/exp/control_ckt_final_upscaled.jpg" alt="Ckt" width="1000" height="400" style="min-width: 400px;" style="min-width: 400px;">
-                        <figcaption><strong>Control Circuit Diagram</strong></figcaption>
-                    </div>
-                    <br>
-                    <div class="row" id="controlCircuitInput">
-                        <form id="controlCircuitTPInput" class="text-center fix-spacing">
-                            <select id="voltageSelector" name="voltageOption">
-                                <option value="1">TP1</option>
-                                <option value="2">TP2</option>
-                                <option value="3">TP3</option>
-                                <option value="4">TP4</option>
-                                <option value="5">TP5</option>
-                                <option value="6">TP6</option>
-                                <option value="7">TP7</option>
-                                <option value="8">TP8</option>
-                                <option value="9">TP9</option>
-                            </select>
-                            <br><br>
-                            <input type="range" min="0" max="6" value="0.00" step="0.01" class="slider" id="voltageSlider">
-                            <p>Reference DC Voltage: <br> <span id="refVoltageValue">0.00</span> Volts</p>
-                            <button type="button" onclick="controlCircuitWaveform()">Measure Test Point(TP)</button>
-                        </form>
-                        <div id="imageContainerTP" style="z-index: -1;"></div>
-                    </div>
-                </div>
+                
             </div>
         </div>
 
