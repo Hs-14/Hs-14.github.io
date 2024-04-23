@@ -60,6 +60,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../config.js"></script>
     <style>
         h1 {
             font-size: 1.8rem;
@@ -400,52 +401,16 @@
                 <div class="text-center fix-spacing">
                     <h2 id="1p-fullwave-fullcontrolled-rectifier">Study of 3-phase full-wave fully-controlled rectifier</h2>
                 </div>
-                <!-- <h4 id="to-make-students-familiar-with-frequently-used-electrical-equipment">To make students familiar with frequently used electrical equipment.</h4> -->
-
-                <!--toggle display between R load and RL load--> 
-                <script>
-                    // function switchSection() {
-                    //     const RSimulation = document.getElementById('RSimulation');
-                    //     const RLSimulation = document.getElementById('RLSimulation');
-                    //     const simulationForm = document.getElementById('simulationForm');
-                    //     const otherSection = document.getElementById('otherSection');
                 
-                    //     if (RSimulation.checked) {
-                    //         symSimulation.style.display = 'block';
-                    //         aSymSimulation.style.display = 'none';
-                    //     } else if (RLSimulation.checked) {
-                    //         symSimulation.style.display = 'none';
-                    //         aSymSimulation.style.display = 'block';
-                    //     }
-                    // }
-                
-                    // Add an event listener to the radio buttons
-                    // document.addEventListener('DOMContentLoaded', function () {
-                    //     switchSection(); // Call the function on page load
-                    //     document.querySelectorAll('input[name="section"]').forEach(function (radio) {
-                    //         radio.addEventListener('change', switchSection);
-                    //     });
-                    // });
-                </script>
-                
-
-                <!-- <div>
-                    <input type="radio" id="RSimulation" name="section" checked>
-                    <label for="RSimulation">Symmetrical</label>
-                
-                    <input type="radio" id="RLSimulation" name="section">
-                    <label for="RLSimulation">Asymmetrical</label>
-                </div> -->
-
                 <div id="3pSimulation">
                     <div class="px-5 pb-4 flex-grow-1 text-center fix-spacing" id="RloadPowerCircuit">
                         <img src="assets/images/exp/3pfullcontrolled.jpg" alt="Ckt" width="700" height="400" style="min-width: 400px;" style="min-width: 400px;">
                         <figcaption><strong>Power Circuit Diagram</strong></figcaption>
                     </div>
                     <br>
-                    <div class="row flex-nowrap" id="RloadInputandWaveform">
+                    <div class="power-ckt-input" id="RloadInputandWaveform">
                         <form id="simulationFormR" class="text-center fix-spacing">
-                            <label for="acVoltage">AC Voltage Amplitude (V):</label>
+                            <label for="acVoltage">AC Phase Voltage Amplitude (V):</label>
                             <input type="number" id="acVoltageInputR" name="acVoltage" value="220">
                             <br>
     
@@ -463,6 +428,7 @@
     
                             <button type="button" onclick="runSimulationAndCalculate()">Run Simulation</button>
                             <div id="vdcDisplayR"></div>
+                            <div id="ioDisplay"></div>
                         </form>
                         <div id="imageContainerR" style="z-index: -1;"></div>
                     </div> 
@@ -514,7 +480,7 @@
                     load_inductance: 0
                 };
 
-                fetch('https://f6f04784490ebf14110a8065d5741ffe.loophole.site/rectifier/three_phase/', {
+                fetch(websiteLink+'/rectifier/three_phase/', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -547,66 +513,17 @@
 
                 // Calculate Vdc
                 var Vdc = 0;
-                
-                if(loadType=='R'){
-                    Vdc = (Math.sqrt(2)*acVoltage / (Math.PI)) * (1 + Math.cos(alpha));
-                } 
-                else if(loadType=='RL'){
-                    Vdc = 2*Math.sqrt(2)*acVoltage / Math.PI * Math.cos(alpha);
+                var Io = 0;
+                Vdc = (3*Math.sqrt(6)*acVoltage / (Math.PI)) * (Math.cos(alpha));
+                if(resistance==0){
+                    resistance=0.01;
                 }
-                
-
+                Io = Vdc/resistance;
                 // Display result
                 document.getElementById('vdcDisplay'+loadType).innerText = 'Vavg: ' + Vdc.toFixed(2) + ' V';
                 document.getElementById("vdcDisplay"+loadType).style.display = "block";
-            }
-
-            function controlCircuitWaveform(){
-                console.log("chlgya bcc");
-                var loadType = 'R';
-                // const RLSimulation = document.getElementById('RLSimulation');
-                // if(RLSimulation.checked){
-                //     loadType = 'RL';
-                // }
-                var acVoltage = document.getElementById('acVoltageInput'+loadType).value;
-                var frequency = document.getElementById('frequencyInput'+loadType).value;
-
-                var TPnumber = 0;
-                var TPnumber = document.getElementById("voltageSelector").value;
-                var dcVoltage = document.getElementById("voltageSlider").value;
-                var data = {
-                    source_voltage: acVoltage,
-                    frequency: frequency,
-                    alpha: 0,
-                    load_resistance: 0, // Match the key on the server side
-                    load_inductance: 0,
-                    dc_voltage: dcVoltage
-                };
-
-                fetch('https://f6f04784490ebf14110a8065d5741ffe.loophole.site/rectifier/tp'+TPnumber+'/', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(data)
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.blob();
-                })
-                .then(blob => {
-                    // Create an object URL for the blob
-                    var objectURL = URL.createObjectURL(blob);
-
-                    // Display the image in the imageContainer
-                    var imageContainer = document.getElementById('imageContainerTP');
-                    imageContainer.innerHTML = '<img src="' + objectURL + '" alt="Simulation Result">';
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
+                document.getElementById("ioDisplay").innerText = 'Io: ' + Io.toFixed(2) + 'A';
+                document.getElementById("ioDisplay").style.display = "block";
             }
         </script>
     </div>
