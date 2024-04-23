@@ -95,6 +95,11 @@ html {
     height: 2.5rem;
 }
 
+.power-ckt-input {
+    display: flex;
+    flex-direction: row;
+}
+
 @media (max-width: 991px) {
     .sidebar {
         max-height: 6000px;
@@ -104,6 +109,9 @@ html {
     }
     .vlabs-logo {
         height: 3rem;
+    }
+    .power-ckt-input {
+        flex-direction: column;
     }
     .simulation-header {
         display: none !important;
@@ -502,6 +510,7 @@ button {
 }
 
 #imageContainerR {
+    min-width: 700px;
     width: 1200px; /* Adjust the width as needed */
     height: 600px; /* Adjust the height as needed */
     background-image: url('/assets/images/graph_placeholder.png');
@@ -518,6 +527,24 @@ button {
 }
 
 #imageContainerRL {
+    min-width: 700px;
+    width: 1200px; /* Adjust the width as needed */
+    height: 600px; /* Adjust the height as needed */
+    background-image: url('/assets/images/graph_placeholder.png');
+    background-size: cover; /* For background image */
+    background-repeat: no-repeat;
+    background-position: center center;
+    position: relative;
+    overflow: hidden; /* Hide overflowing content */
+
+    /* For actual image inside the container */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#imageContainerRLE {
+    min-width: 700px;
     width: 1200px; /* Adjust the width as needed */
     height: 600px; /* Adjust the height as needed */
     background-image: url('/assets/images/graph_placeholder.png');
@@ -534,6 +561,7 @@ button {
 }
 
 #imageContainerTP {
+    min-width: 700px;
     width: 1200px; /* Adjust the width as needed */
     height: 600px; /* Adjust the height as needed */
     background-image: url('/assets/images/graph_placeholder.png');
@@ -547,6 +575,12 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+#controlCktDiag {
+    width: 1000px;
+    height: 400px;
+    min-width: 700px;
 }
 
 #simulationForm button {
