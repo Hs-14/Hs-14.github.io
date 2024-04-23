@@ -613,7 +613,7 @@
 
             function runSimulation(acVoltage,frequency,triggeringAngle,loadResistance,loadInductance,reverseVoltage,loadType) {
                 // Prepare data to be sent in the POST request
-                console.log(acVoltage," ",frequency," ",loadResistance," ",triggeringAngle," ",loadInductance);
+                // console.log(acVoltage," ",frequency," ",loadResistance," ",triggeringAngle," ",loadInductance);
                 var data = {
                     source_voltage: acVoltage,
                     frequency: frequency,
@@ -632,7 +632,7 @@
                 if(loadType=='RLE'){
                     convType = 'buck_boost';
                 }
-                console.log(websiteLink+'/rectifier/'+convType+'/');
+                // console.log(websiteLink+'/rectifier/'+convType+'/');
                 fetch(websiteLink+'/rectifier/'+convType+'/', {
                     method: 'POST',
                     headers: {
@@ -663,18 +663,26 @@
             function calculateVdc(acVoltage,frequency,alpha,resistance,loadInductance,reverseVoltage,loadType) {
                 // console.log(acVoltage," ",frequency," ",resistance," ",alpha," ",loadInductance);
                 // Convert alpha to radians
-                alpha = (alpha * Math.PI) / 180;
+                // alpha = (alpha * Math.PI) / 180;
 
                 // Calculate Vdc
                 var Vdc = 0;
                 
                 if(loadType=='R'){
-                    Vdc = (Math.sqrt(2)*acVoltage / (Math.PI)) * (1 + Math.cos(alpha));
+                    Vdc = alpha*acVoltage;
                 } 
                 else if(loadType=='RL'){
-                    Vdc = 2*Math.sqrt(2)*acVoltage / Math.PI * Math.cos(alpha);
+                    if(alpha==1){
+                        alpha = 0.9999;
+                    }
+                    Vdc = acVoltage/(1-alpha);
+                } else if(loadType=='RLE'){
+                    if(alpha==1){
+                        alpha = 0.9999;
+                    }
+                    Vdc = alpha*acVoltage/(1-alpha);
                 }
-                
+                // console.log(alpha,acVoltage,Vdc);
 
                 // Display result
                 document.getElementById('vdcDisplay'+loadType).innerText = 'Vavg: ' + Vdc.toFixed(2) + ' V';
