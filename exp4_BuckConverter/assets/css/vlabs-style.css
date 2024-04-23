@@ -465,7 +465,7 @@ button {
     clear: both; /* Ensure that nothing is stacked horizontally */
 }
 
-#vdcDisplayR, #vdcDisplayRL {
+#vdcDisplayR, #vdcDisplayRL, #vdcDisplayRLE {
     font-family: sans-serif;
     margin-top: 20px;
     font-size: 25px;
