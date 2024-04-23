@@ -95,6 +95,11 @@ html {
     height: 2.5rem;
 }
 
+.power-ckt-input {
+    display: flex;
+    flex-direction: row;
+}
+
 @media (max-width: 991px) {
     .sidebar {
         max-height: 6000px;
@@ -104,6 +109,9 @@ html {
     }
     .vlabs-logo {
         height: 3rem;
+    }
+    .power-ckt-input {
+        flex-direction: column;
     }
     .simulation-header {
         display: none !important;
